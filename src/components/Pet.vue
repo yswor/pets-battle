@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Pet } from '@/type';
+import type { Pet } from '@/type'
 
 defineProps<{ pet: Pet }>()
 </script>
 
 <template>
-  <div class="container" key="{{ pet.id }}">
+  <div class="pet-card" key="{{ pet.id }}">
     <div class="icon"></div>
     <div class="name">{{ pet.name }}</div>
     <div class="owner">{{ pet.owner }}</div>
@@ -13,13 +13,13 @@ defineProps<{ pet: Pet }>()
 </template>
 
 <style scoped>
-.container {
+.pet-card {
   padding: 8px;
   background: #fff;
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  border: 1px solid #66BB6A;
+  border: 1px solid #66bb6a;
 
   display: flex;
   flex-direction: column;

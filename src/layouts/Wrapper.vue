@@ -4,11 +4,11 @@
 <template>
   <div class="wrap-layout-container">
     <nav class="wrap-layout-sidebar">
-      <router-link class="wrap-layout-nav-item" to="/" active-class="active">宠物列表</router-link>
-      <router-link class="wrap-layout-nav-item" to="/tasks" active-class="active">任务管理</router-link>
-      <router-link class="wrap-layout-nav-item" to="/battle" active-class="active">宠物对战</router-link>
-      <router-link class="wrap-layout-nav-item" to="/gifts" active-class="active">好友赠送</router-link>
-      <router-link class="wrap-layout-nav-item" to="/settings" active-class="active">系统设置</router-link>
+      <router-link class="wrap-layout-nav-item" to="/" active-class="active">学生列表</router-link>
+      <router-link class="wrap-layout-nav-item" to="/pets" active-class="active">宠物列表</router-link>
+      <router-link class="wrap-layout-nav-item" to="/tasks" active-class="active">任务列表</router-link>
+      <!-- <router-link class="wrap-layout-nav-item" to="/gifts" active-class="active">好友赠送</router-link>
+      <router-link class="wrap-layout-nav-item" to="/settings" active-class="active">系统设置</router-link> -->
     </nav>
     <div class="wrap-layout-content">
       <RouterView />

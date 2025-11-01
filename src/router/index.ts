@@ -7,28 +7,28 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+    },
+    {
+      path: '/pets',
+      name: 'pets',
+      component: () => import('../views/PetsView.vue'),
     },
     {
       path: '/tasks',
       name: 'tasks',
-      component: () => import('../views/TasksView.vue')
+      component: () => import('../views/TasksView.vue'),
     },
-    {
-      path: '/battle',
-      name: 'battle',
-      component: () => import('../views/PetsBattleView.vue')
-    },
-    {
-      path: '/gifts',
-      name: 'gifts',
-      component: () => import('../views/GiftsView.vue')
-    },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: () => import('../views/SettingsView.vue')
-    },
+    // {
+    //   path: '/gifts',
+    //   name: 'gifts',
+    //   component: () => import('../views/GiftsView.vue'),
+    // },
+    // {
+    //   path: '/settings',
+    //   name: 'settings',
+    //   component: () => import('../views/SettingsView.vue'),
+    // },
   ],
 })
 

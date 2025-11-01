@@ -1,74 +1,454 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import Pet from '@/components/Pet.vue';
+import { ref } from 'vue'
+import Student from '@/components/Student.vue'
+import type { Student as StudentType } from '@/type'
+import Drawer from '@/components/Drawer.vue'
 
-const pets = ref([
-  { id: 1, name: '小白', owner: '张三', icon: 'icon1.png' },
-  { id: 2, name: '小黑', owner: '李四', icon: 'icon2.png' },
-  { id: 3, name: '小花', owner: '王五', icon: 'icon3.png' },
-  { id: 4, name: '小黄', owner: '赵六', icon: 'icon4.png' },
-  { id: 5, name: '小灰', owner: '钱七', icon: 'icon5.png' },
-  { id: 6, name: '小橙', owner: '孙八', icon: 'icon6.png' },
-  { id: 7, name: '小蓝', owner: '周九', icon: 'icon7.png' },
-  { id: 8, name: '小红', owner: '陈八', icon: 'icon8.png' },
-  { id: 9, name: '小绿', owner: '王九', icon: 'icon9.png' },
-  { id: 10, name: '小紫', owner: '刘十', icon: 'icon10.png' },
-  { id: 11, name: '小霞', owner: '赵十一', icon: 'icon11.png' },
-  { id: 12, name: '小雪', owner: '孙十二', icon: 'icon12.png' },
-  { id: 13, name: '小雨', owner: '周十三', icon: 'icon13.png' },
-  { id: 14, name: '小风', owner: '吴十四', icon: 'icon14.png' },
-  { id: 15, name: '小林', owner: '郑十五', icon: 'icon15.png' },
-  { id: 16, name: '小峰', owner: '冯十六', icon: 'icon16.png' },
-  { id: 17, name: '小刚', owner: '陈十七', icon: 'icon17.png' },
-  { id: 18, name: '小丽', owner: '褚十八', icon: 'icon18.png' },
-  { id: 19, name: '小燕', owner: '卫十九', icon: 'icon19.png' },
-  { id: 20, name: '小娜', owner: '蒋二十', icon: 'icon20.png' },
-  { id: 21, name: '小敏', owner: '沈二一', icon: 'icon21.png' },
-  { id: 22, name: '小强', owner: '韩二二', icon: 'icon22.png' },
-  { id: 23, name: '小杰', owner: '杨二三', icon: 'icon23.png' },
-  { id: 24, name: '小琴', owner: '朱二四', icon: 'icon24.png' },
-  { id: 25, name: '小彤', owner: '秦二五', icon: 'icon25.png' },
-  { id: 26, name: '小宇', owner: '尤二六', icon: 'icon26.png' },
-  { id: 27, name: '小浩', owner: '许二七', icon: 'icon27.png' },
-  { id: 28, name: '小亮', owner: '何二八', icon: 'icon28.png' },
-  { id: 29, name: '小凯', owner: '吕二九', icon: 'icon29.png' },
-  { id: 30, name: '小鹏', owner: '施三十', icon: 'icon30.png' },
-  { id: 31, name: '小博', owner: '张三一', icon: 'icon31.png' },
-  { id: 32, name: '小辰', owner: '王三二', icon: 'icon32.png' },
-  { id: 33, name: '小宁', owner: '李三三', icon: 'icon33.png' },
-  { id: 34, name: '小晨', owner: '赵三四', icon: 'icon34.png' },
-  { id: 35, name: '小冬', owner: '孙三五', icon: 'icon35.png' },
-  { id: 36, name: '小夏', owner: '周三六', icon: 'icon36.png' },
-  { id: 37, name: '小秋', owner: '吴三七', icon: 'icon37.png' },
-  { id: 38, name: '小彪', owner: '郑三八', icon: 'icon38.png' },
-  { id: 39, name: '小虎', owner: '冯三九', icon: 'icon39.png' },
-  { id: 40, name: '小龙', owner: '陈四十', icon: 'icon40.png' },
-  { id: 41, name: '小翔', owner: '褚四一', icon: 'icon41.png' },
-  { id: 42, name: '小瑞', owner: '卫四二', icon: 'icon42.png' },
-  { id: 43, name: '小聪', owner: '蒋四三', icon: 'icon43.png' },
-  { id: 44, name: '小颖', owner: '沈四四', icon: 'icon44.png' },
-  { id: 45, name: '小蕾', owner: '韩四五', icon: 'icon45.png' },
-  { id: 46, name: '小菲', owner: '杨四六', icon: 'icon46.png' },
-  { id: 47, name: '小洁', owner: '朱四七', icon: 'icon47.png' },
-  { id: 48, name: '小军', owner: '秦四八', icon: 'icon48.png' },
-  { id: 49, name: '小兰', owner: '尤四九', icon: 'icon49.png' },
-  { id: 50, name: '小童', owner: '许五十', icon: 'icon50.png' },
-  { id: 51, name: '小乐', owner: '何五一', icon: 'icon51.png' },
-  { id: 52, name: '小辰2', owner: '吕五二', icon: 'icon52.png' },
-  { id: 53, name: '小皓', owner: '施五三', icon: 'icon53.png' },
-  { id: 54, name: '小聪2', owner: '张五四', icon: 'icon54.png' },
-  { id: 55, name: '小影', owner: '王五五', icon: 'icon55.png' }
+const students = ref<StudentType[]>([
+  {
+    id: 1,
+    name: '张三',
+    coin: 100,
+    pets: [{ id: 1, name: '小黑龙', owner: '张三', icon: '' }],
+    receivedGifts: [{ id: 1, senderId: 13, receiverId: 1, type: '番茄', value: 30 }],
+    sendGifts: [{ id: 2, senderId: 1, receiverId: 14, type: '鸡蛋', value: 10 }],
+  },
+  {
+    id: 2,
+    name: '李四',
+    coin: 150,
+    pets: [{ id: 2, name: '火凤凰', owner: '李四', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 3,
+    name: '王五',
+    coin: 80,
+    pets: [{ id: 3, name: '冰龙', owner: '王五', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 4,
+    name: '赵六',
+    coin: 200,
+    pets: [{ id: 4, name: '雷鸟', owner: '赵六', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 5,
+    name: '陈七',
+    coin: 120,
+    pets: [{ id: 5, name: '幽灵猫', owner: '陈七', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 6,
+    name: '杨八',
+    coin: 90,
+    pets: [{ id: 6, name: '独角兽', owner: '杨八', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 7,
+    name: '吴九',
+    coin: 175,
+    pets: [{ id: 7, name: '石头人', owner: '吴九', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 8,
+    name: '郑十',
+    coin: 135,
+    pets: [{ id: 8, name: '飞马', owner: '郑十', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 9,
+    name: '黄一',
+    coin: 160,
+    pets: [{ id: 9, name: '海豚', owner: '黄一', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 10,
+    name: '周二',
+    coin: 110,
+    pets: [{ id: 10, name: '闪电鸟', owner: '周二', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 11,
+    name: '吕三',
+    coin: 95,
+    pets: [{ id: 11, name: '树精', owner: '吕三', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 12,
+    name: '戴四',
+    coin: 185,
+    pets: [{ id: 12, name: '水晶兽', owner: '戴四', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 13,
+    name: '孙五',
+    coin: 140,
+    pets: [{ id: 13, name: '风精灵', owner: '孙五', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 14,
+    name: '马六',
+    coin: 170,
+    pets: [{ id: 14, name: '地龙', owner: '马六', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 15,
+    name: '胡七',
+    coin: 125,
+    pets: [{ id: 15, name: '火狐', owner: '胡七', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 16,
+    name: '朱八',
+    coin: 145,
+    pets: [{ id: 16, name: '冰凤凰', owner: '朱八', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 17,
+    name: '秦九',
+    coin: 155,
+    pets: [{ id: 17, name: '雷龙', owner: '秦九', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 18,
+    name: '尹十',
+    coin: 130,
+    pets: [{ id: 18, name: '光精灵', owner: '尹十', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 19,
+    name: '何一',
+    coin: 190,
+    pets: [{ id: 19, name: '暗影豹', owner: '何一', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 20,
+    name: '施二',
+    coin: 105,
+    pets: [{ id: 20, name: '金鹰', owner: '施二', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 21,
+    name: '张明',
+    coin: 165,
+    pets: [{ id: 21, name: '银狼', owner: '张明', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 22,
+    name: '李华',
+    coin: 115,
+    pets: [{ id: 22, name: '铜虎', owner: '李华', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 23,
+    name: '王芳',
+    coin: 195,
+    pets: [{ id: 23, name: '岩熊', owner: '王芳', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 24,
+    name: '赵强',
+    coin: 180,
+    pets: [{ id: 24, name: '水獭', owner: '赵强', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 25,
+    name: '陈勇',
+    coin: 85,
+    pets: [{ id: 25, name: '火猴', owner: '陈勇', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 26,
+    name: '杨雪',
+    coin: 175,
+    pets: [{ id: 26, name: '冰熊', owner: '杨雪', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 27,
+    name: '吴磊',
+    coin: 135,
+    pets: [{ id: 27, name: '雷豹', owner: '吴磊', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 28,
+    name: '郑霞',
+    coin: 205,
+    pets: [{ id: 28, name: '风鹰', owner: '郑霞', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 29,
+    name: '黄龙',
+    coin: 145,
+    pets: [{ id: 29, name: '光虎', owner: '黄龙', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 30,
+    name: '周凤',
+    coin: 160,
+    pets: [{ id: 30, name: '暗龙', owner: '周凤', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 31,
+    name: '吕云',
+    coin: 120,
+    pets: [{ id: 31, name: '星兽', owner: '吕云', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 32,
+    name: '戴峰',
+    coin: 190,
+    pets: [{ id: 32, name: '月魔', owner: '戴峰', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 33,
+    name: '孙琳',
+    coin: 140,
+    pets: [{ id: 33, name: '雾兽', owner: '孙琳', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 34,
+    name: '马婷',
+    coin: 175,
+    pets: [{ id: 34, name: '云龙', owner: '马婷', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 35,
+    name: '胡斌',
+    coin: 155,
+    pets: [{ id: 35, name: '霜虎', owner: '胡斌', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 36,
+    name: '朱莉',
+    coin: 130,
+    pets: [{ id: 36, name: '炎狼', owner: '朱莉', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 37,
+    name: '秦浩',
+    coin: 200,
+    pets: [{ id: 37, name: '雷凤', owner: '秦浩', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 38,
+    name: '尹丽',
+    coin: 145,
+    pets: [{ id: 38, name: '影豹', owner: '尹丽', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 39,
+    name: '何强',
+    coin: 165,
+    pets: [{ id: 39, name: '冰鹰', owner: '何强', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 40,
+    name: '施然',
+    coin: 185,
+    pets: [{ id: 40, name: '风虎', owner: '施然', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 41,
+    name: '张锋',
+    coin: 150,
+    pets: [{ id: 41, name: '水龙', owner: '张锋', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 42,
+    name: '李雨',
+    coin: 170,
+    pets: [{ id: 42, name: '火凤', owner: '李雨', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 43,
+    name: '王震',
+    coin: 125,
+    pets: [{ id: 43, name: '土熊', owner: '王震', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 44,
+    name: '赵雪',
+    coin: 195,
+    pets: [{ id: 44, name: '电豹', owner: '赵雪', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 45,
+    name: '陈明',
+    coin: 135,
+    pets: [{ id: 45, name: '光鹰', owner: '陈明', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 46,
+    name: '杨帆',
+    coin: 180,
+    pets: [{ id: 46, name: '暗狼', owner: '杨帆', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 47,
+    name: '吴晨',
+    coin: 160,
+    pets: [{ id: 47, name: '星凤', owner: '吴晨', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 48,
+    name: '郑阳',
+    coin: 140,
+    pets: [{ id: 48, name: '月虎', owner: '郑阳', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 49,
+    name: '黄峰',
+    coin: 175,
+    pets: [{ id: 49, name: '雾豹', owner: '黄峰', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 50,
+    name: '周琪',
+    coin: 155,
+    pets: [{ id: 50, name: '云鹰', owner: '周琪', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
+  {
+    id: 51,
+    name: '吕星',
+    coin: 190,
+    pets: [{ id: 51, name: '霜龙', owner: '吕星', icon: '' }],
+    receivedGifts: [],
+    sendGifts: [],
+  },
 ])
+
+const drawerOpen = ref(false)
+
+const curStudent = ref<StudentType | null>(null)
+
+const showDetail = (id: number) => {
+  curStudent.value = students.value.find((s) => s.id === id) || null
+  drawerOpen.value = true
+}
+
+const closeDetail = () => {
+  drawerOpen.value = false
+}
 </script>
 
 <template>
   <div class="container">
-    <h1 class="header">宠物列表</h1>
     <div class="list">
-      <div class="pet-item" v-for="pet in pets" :key="pet.id">
-        <Pet :pet="pet" />
+      <div class="student-item" v-for="student in students" :key="student.id">
+        <Student :student="student" @openDetail="showDetail" />
       </div>
     </div>
+    <Drawer :open="drawerOpen" @close="closeDetail">
+      <div class="detail">
+        <h2>学生详情</h2>
+        <div class="name">
+          <div class="label">姓名</div>
+          <div class="value">{{ curStudent?.name }}</div>
+        </div>
+        <div class="coin">
+          <div class="label">积分</div>
+          <div class="value">{{ curStudent?.coin }}</div>
+        </div>
+      </div>
+    </Drawer>
   </div>
 </template>
 
@@ -81,11 +461,6 @@ const pets = ref([
   flex-direction: column;
 }
 
-.header {
-  flex-shrink: 0;
-  margin: 0 0 12px;
-}
-
 .list {
   flex: 1;
   overflow: auto;
@@ -94,9 +469,11 @@ const pets = ref([
   flex-wrap: wrap;
 }
 
-.pet-item {
-  width: calc(100% / 8);
-  height: 400px;
+.student-item {
+  width: calc((100% - 16px * 8) / 8);
   margin: 0 16px 16px 0;
+}
+
+.detail {
 }
 </style>
