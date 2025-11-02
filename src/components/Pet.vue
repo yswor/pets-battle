@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import type { Pet } from '@/type'
 
-defineProps<{ pet: Pet }>()
+const { pet } = defineProps<{ pet: Pet }>()
+
+const emit = defineEmits<{
+  edit: [id: number]
+}>()
+
+const handleEdit = () => {
+  emit('edit', pet.id)
+}
 </script>
 
 <template>
@@ -29,7 +37,7 @@ defineProps<{ pet: Pet }>()
 
 .icon {
   width: 100%;
-  background-color: yellowgreen;
+  background: linear-gradient(225deg, #65c11e 0%, #1ec183 100%);
   flex: 1;
 }
 

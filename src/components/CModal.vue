@@ -12,29 +12,29 @@ const clickMask = () => {
 </script>
 
 <template>
-  <div v-if="open" class="drawer-container">
+  <div v-if="open" class="common-modal-container">
     <div class="slot">
       <slot></slot>
     </div>
-    <div class="drawer-mask" @click.stop="clickMask"></div>
+    <div class="common-modal-mask" @click.stop="clickMask"></div>
   </div>
 </template>
 
 <style scoped>
-.drawer-container {
+.common-modal-container {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  justify-content: flex-end;
-  align-items: stretch;
+  justify-content: center;
+  align-items: center;
   pointer-events: none;
 }
 
-.drawer-mask {
+.common-modal-mask {
   position: absolute;
   top: 0;
   left: 0;
@@ -48,13 +48,12 @@ const clickMask = () => {
 .slot {
   position: relative;
   z-index: 1002;
-  width: 42%;
-  height: 100%;
-  background: #fff9e6;
+  width: 32vw;
+  min-height: 10vh;
+  background: #ffffff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
   pointer-events: auto;
   padding: 32px;
-  border-top-left-radius: 32px;
-  border-bottom-left-radius: 32px;
+  border-radius: 12px;
 }
 </style>

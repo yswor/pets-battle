@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import Pet from '@/components/Pet.vue';
+import { ref } from 'vue'
+import Pet from '@/components/Pet.vue'
+import CModal from '@/components/CModal.vue'
 
 const pets = ref([
   { id: 1, name: '小白', owner: '张三', icon: 'icon1.png' },
@@ -57,17 +58,32 @@ const pets = ref([
   { id: 52, name: '小辰2', owner: '吕五二', icon: 'icon52.png' },
   { id: 53, name: '小皓', owner: '施五三', icon: 'icon53.png' },
   { id: 54, name: '小聪2', owner: '张五四', icon: 'icon54.png' },
-  { id: 55, name: '小影', owner: '王五五', icon: 'icon55.png' }
+  { id: 55, name: '小影', owner: '王五五', icon: 'icon55.png' },
 ])
+
+const editModalOpen = ref(false)
+
+const showEditModal = () => {
+  editModalOpen.value = true
+}
+
+const closeEditModal = () => {
+  editModalOpen.value = false
+}
 </script>
 
 <template>
   <div class="container">
     <div class="list">
       <div class="pet-item" v-for="pet in pets" :key="pet.id">
-        <Pet :pet="pet" />
+        <Pet :pet="pet" @edit="showEditModal" />
       </div>
     </div>
+    <CModal :open="editModalOpen" @close="closeEditModal">
+      <div class="edit-modal">
+        <div class="btn">确认</div>
+      </div>
+    </CModal>
   </div>
 </template>
 

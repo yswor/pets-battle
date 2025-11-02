@@ -1,8 +1,81 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Student from '@/components/Student.vue'
-import type { Student as StudentType } from '@/type'
+import type { Pet, Student as StudentType } from '@/type'
 import Drawer from '@/components/Drawer.vue'
+
+const petNames = [
+  '小黑龙',
+  '火凤凰',
+  '冰龙',
+  '雷鸟',
+  '幽灵猫',
+  '独角兽',
+  '石头人',
+  '飞马',
+  '海豚',
+  '闪电鸟',
+  '树精',
+  '水晶兽',
+  '风精灵',
+  '地龙',
+  '火狐',
+  '冰凤凰',
+  '雷龙',
+  '光精灵',
+  '暗影豹',
+  '金鹰',
+  '银狼',
+  '铜虎',
+  '岩熊',
+  '水獭',
+  '火猴',
+  '冰熊',
+  '雷豹',
+  '风鹰',
+  '光虎',
+  '暗龙',
+  '星兽',
+  '月魔',
+  '雾兽',
+  '云龙',
+  '霜虎',
+  '炎狼',
+  '雷凤',
+  '影豹',
+  '冰鹰',
+  '风虎',
+  '水龙',
+  '火凤',
+  '土熊',
+  '电豹',
+  '光鹰',
+  '暗狼',
+  '星凤',
+  '月虎',
+  '雾豹',
+  '云鹰',
+  '霜龙',
+]
+
+let petIdCounter = 0
+
+const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+const generatePetsFor = (ownerName: string) => {
+  const count = getRandomInt(0, 3) // 0..3 pets
+  return Array.from({ length: count }).map(() => {
+    petIdCounter++
+    return {
+      id: petIdCounter,
+      name: petNames[Math.floor(Math.random() * petNames.length)],
+      owner: ownerName,
+      icon: '',
+    }
+  })
+}
 
 const students = ref<StudentType[]>([
   {
@@ -415,6 +488,11 @@ const students = ref<StudentType[]>([
   },
 ])
 
+students.value = students.value.map((student) => ({
+  ...student,
+  pets: [...student.pets, ...generatePetsFor(student.name)] as Pet[],
+}))
+
 const drawerOpen = ref(false)
 
 const curStudent = ref<StudentType | null>(null)
@@ -438,15 +516,24 @@ const closeDetail = () => {
     </div>
     <Drawer :open="drawerOpen" @close="closeDetail">
       <div class="detail">
-        <h2>学生详情</h2>
-        <div class="name">
+        <div class="info-line name">
           <div class="label">姓名</div>
           <div class="value">{{ curStudent?.name }}</div>
         </div>
-        <div class="coin">
+        <div class="info-line coin">
           <div class="label">积分</div>
           <div class="value">{{ curStudent?.coin }}</div>
         </div>
+        <div class="info-line pets">
+          <div class="label">宠物</div>
+          <div class="value pet-cards">
+            <div class="pet-card" v-for="pet in curStudent?.pets" :key="pet.id">
+              <div class="icon"></div>
+              <div class="name">{{ pet.name }}</div>
+            </div>
+          </div>
+        </div>
+        <!-- TODO: 礼物赠送情况 -->
       </div>
     </Drawer>
   </div>
@@ -475,5 +562,62 @@ const closeDetail = () => {
 }
 
 .detail {
+  width: 100%;
+  height: 100%;
+  border: 10px solid #ddd;
+
+  padding: 12px;
+}
+
+.info-line {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+.info-line .label {
+  font-weight: 600;
+  color: #000;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+.info-line .value {
+  color: #333;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.info-line .value.pet-cards {
+}
+
+.pet-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 16px;
+  margin-bottom: 8px;
+
+  background: #fff;
+  width: 80px;
+  height: 100px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.pet-card .icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(225deg, #7ed938 0%, #09ba76 100%);
+  border-radius: 4px;
+  margin: 0 0 12px;
+}
+
+.pet-card .name {
+  font-size: 12px;
+  color: #333;
+  text-align: center;
 }
 </style>
