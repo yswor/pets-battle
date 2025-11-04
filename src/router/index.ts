@@ -19,11 +19,11 @@ const router = createRouter({
       name: 'tasks',
       component: () => import('../views/TasksView.vue'),
     },
-    // {
-    //   path: '/gifts',
-    //   name: 'gifts',
-    //   component: () => import('../views/GiftsView.vue'),
-    // },
+    {
+      path: '/entry',
+      name: 'entry',
+      component: () => import('../views/EntryView.vue'),
+    },
     // {
     //   path: '/settings',
     //   name: 'settings',

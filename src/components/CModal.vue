@@ -48,8 +48,8 @@ const clickMask = () => {
 .slot {
   position: relative;
   z-index: 1002;
-  width: 32vw;
-  min-height: 10vh;
+  width: 24vw;
+  min-height: 24vh;
   background: #ffffff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
   pointer-events: auto;

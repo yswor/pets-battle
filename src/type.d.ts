@@ -1,8 +1,9 @@
 export type Pet = {
   id: number
   name: string
-  owner: string
+  ownerId: number
   icon: string
+  coin: number
 }
 
 export type Gift = {
@@ -16,7 +17,7 @@ export type Gift = {
 export type Student = {
   id: number
   name: string
-  pets: Pet[]
+  pets: number[]
   coin: number
   receivedGifts: Gift[]
   sendGifts: Gift[]

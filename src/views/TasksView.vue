@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useStudentStore } from '@/stores/students'
 import { ref } from 'vue'
+
+const stuStore = useStudentStore()
 
 const tasks = ref([
   {
@@ -155,11 +158,24 @@ const tasks = ref([
 const addTask = () => {}
 
 const assignTask = (id: number) => {}
+const searchTask = () => {}
+
+const inputHandler = (event: Event) => {
+  const target = event.target
+  // console.log('input:', target.value)
+}
 </script>
 
 <template>
   <div class="container">
     <div class="header">
+      <div class="filter">
+        <!-- <div class="filter-btn"></div>
+        <div class="filter-btn"></div>
+        <div class="filter-btn"></div> -->
+        <input class="filter-btn" @input="" />
+      </div>
+      <div class="search-btn" @click="searchTask">搜索</div>
       <div class="add-btn" @click="addTask">新增</div>
     </div>
     <div class="list">
@@ -168,10 +184,17 @@ const assignTask = (id: number) => {}
         <div class="content">{{ task.content }}</div>
         <div class="info">
           <div class="value">奖励：{{ task.value }}积分</div>
-          <!-- <div class="state">状态：{{ task.state }}</div> -->
+          <div class="state">分配给：{{ stuStore.studentById(task.executorId)?.name }}</div>
         </div>
         <div class="btns">
-          <div class="btn" @click="() => assignTask(task.id)">分配任务</div>
+          <div class="btn" @click="() => assignTask(task.id)" v-if="!task.executorId">分配任务</div>
+          <div
+            class="btn shallow-btn"
+            @click="() => assignTask(task.id)"
+            v-else-if="task.executorId"
+          >
+            已分配
+          </div>
         </div>
       </div>
     </div>
@@ -206,6 +229,27 @@ const assignTask = (id: number) => {}
   font-size: 16px;
   cursor: pointer;
 }
+
+.header .search-btn {
+  width: 128px;
+  height: 40px;
+  border-radius: 20px;
+  background: #ffc107;
+  margin: 0 16px 0 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #5d4037;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.header .filter {
+  flex: 1;
+}
+
 .list {
   overflow: auto;
 }
@@ -265,7 +309,9 @@ const assignTask = (id: number) => {}
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  cursor: pointer;
+.btns .btn.shallow-btn {
+  opacity: 0.5;
 }
 </style>

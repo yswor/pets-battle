@@ -30,11 +30,11 @@ const clickHandler = () => {
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: center;
   cursor: pointer;
   border: 1px solid #fff;
-  color: #fff;
+  color: #fffff0;
 }
 
 .student-card:hover {
