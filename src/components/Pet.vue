@@ -19,15 +19,16 @@ const handleEdit = () => {
 
 <template>
   <div class="pet-card" :key="pet.id">
-    <div class="icon"></div>
+    <img class="icon" :src="pet.icon" />
     <div class="name">{{ pet.name }}</div>
     <div class="owner">{{ stuStore.studentById(pet.ownerId)?.name }}</div>
-    <div class="edit" @click="handleEdit">编辑</div>
+    <!-- <div class="edit" @click="handleEdit">编辑</div> -->
   </div>
 </template>
 
 <style scoped>
 .pet-card {
+  padding: 16px;
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -44,6 +45,8 @@ const handleEdit = () => {
 
 .icon {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
   flex: 1;
 }
 

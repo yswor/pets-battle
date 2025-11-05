@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+</script>
 
 <template>
   <div class="wrap-layout-container">
@@ -11,9 +15,8 @@
         >任务列表</router-link
       >
       <router-link class="wrap-layout-nav-item" to="/entry" active-class="active">入口</router-link>
-      <!-- <router-link class="wrap-layout-nav-item" to="/settings" active-class="active">系统设置</router-link> -->
     </nav>
-    <div class="wrap-layout-content">
+    <div class="page-right-content">
       <RouterView />
     </div>
   </div>
@@ -64,7 +67,31 @@
   background: #4caf50;
 }
 
+.page-right-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 16px;
+}
+
+.page-right-content .user-info {
+  flex-shrink: 0;
+  height: 48px;
+  background: #a5d6a7;
+  border-radius: 12px;
+  padding: 0 32px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #1a535c;
+  font-weight: 600;
+}
+
 .wrap-layout-content {
+  overflow: auto;
   border-radius: 12px;
   flex: 1;
   background: #f1f8e9;

@@ -65,7 +65,7 @@ const confirmEdit = () => {
 
 .pet-item {
   width: calc((100% - 16px * 8) / 8);
-  height: 400px;
+  height: 36%;
   margin: 0 16px 16px 0;
 }
 

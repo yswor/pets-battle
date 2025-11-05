@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { Fragment, ref } from 'vue'
 import Student from '@/components/Student.vue'
 import type { Pet, Student as StudentType } from '@/type'
 import Drawer from '@/components/Drawer.vue'
 import { useStudentStore } from '@/stores/students'
 import { usePetStore } from '@/stores/pets'
+import { useTaskStore } from '@/stores/tasks'
+import { getRandomPetFromPool } from '@/utils/petsPool'
 
 const stuStore = useStudentStore()
 const petStore = usePetStore()
+const taskStore = useTaskStore()
 const drawerOpen = ref(false)
 
 const curStudent = ref<StudentType | null>(null)
@@ -19,6 +22,37 @@ const showDetail = (id: number) => {
 
 const closeDetail = () => {
   drawerOpen.value = false
+}
+
+const addPet = () => {
+  if (!curStudent.value) return
+
+  const petItem = getRandomPetFromPool()
+
+  const petData = {
+    id: petStore.getNextPetId(),
+    petId: petItem.id,
+    level: 0,
+  }
+
+  const stuData = {
+    ...curStudent.value,
+    pets: [...curStudent.value.pets, petData],
+  }
+
+  stuStore.updateStudent({
+    ...curStudent.value,
+    pets: [...curStudent.value.pets, petData],
+  })
+
+  petStore.addPet({
+    ...petData,
+    name: petItem.name,
+    icon: petItem.icon,
+    ownerId: curStudent.value.id,
+  })
+
+  curStudent.value = stuData
 }
 </script>
 
@@ -42,9 +76,22 @@ const closeDetail = () => {
         <div class="info-line pets">
           <div class="label">宠物</div>
           <div class="value pet-cards">
-            <div class="pet-card" v-for="petId in curStudent?.pets" :key="petId">
-              <div class="icon"></div>
-              <div class="name">{{ petStore.petById(petId)?.name }}</div>
+            <div v-if="curStudent?.pets.length">
+              <div class="pet-card" v-for="pet in curStudent?.pets" :key="pet.id">
+                <img class="icon" :src="petStore.petById(pet.id)?.icon" />
+                <div class="name">{{ petStore.petById(pet.id)?.name }}</div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="add-pet btn" @click="addPet">获取宠物</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-line tasks">
+          <div class="label">任务</div>
+          <div class="value task-cards">
+            <div class="task-card" v-for="taskId in curStudent?.tasks" :key="taskId">
+              <div class="content">{{ taskStore.taskById(taskId)?.content }}</div>
             </div>
           </div>
         </div>
@@ -134,5 +181,22 @@ const closeDetail = () => {
   font-size: 12px;
   color: #333;
   text-align: center;
+}
+
+.task-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.task-card {
+  width: 100%;
+  height: 36px;
+  padding: 8px 12px;
+  margin: 0 0 12px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 </style>
