@@ -1,9 +1,11 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Task as TaskType } from '@/type'
+import storage from '@/utils/storage'
 
 export const useTaskStore = defineStore('task', () => {
   const tasks = ref<TaskType[]>([])
+  const maxTaskId = ref(0)
 
   const taskById = computed(() => {
     return (id: number) => tasks.value.find((task) => task.id === id)
@@ -22,5 +24,15 @@ export const useTaskStore = defineStore('task', () => {
     }
   }
 
-  return { tasks, taskById, setTasks, updateTask }
+  function getNextTaskId() {
+    maxTaskId.value += 1
+    storage.set('maxTaskId', maxTaskId.value)
+    return maxTaskId.value
+  }
+
+  function setMaxTaskId(id: number) {
+    maxTaskId.value += 1
+  }
+
+  return { tasks, maxTaskId, taskById, setTasks, updateTask, getNextTaskId, setMaxTaskId }
 })

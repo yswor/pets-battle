@@ -1,16 +1,14 @@
 export type Pet = {
   id: number
-  name: string
   petId: number
   ownerId: number
-  icon: string
   level: number
 }
 
 export type PetPoolItem = {
   id: number
   name: string
-  icon: string
+  levelIconMap: Record<number, string>
 }
 
 export type Gift = {
@@ -41,6 +39,6 @@ export type Task = {
   id: number
   content: string
   rewardCoin: number
-  executorId: number
-  state: string
+  executorId?: number
+  state: number
 }

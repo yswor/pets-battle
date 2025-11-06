@@ -6,7 +6,8 @@ import Drawer from '@/components/Drawer.vue'
 import { useStudentStore } from '@/stores/students'
 import { usePetStore } from '@/stores/pets'
 import { useTaskStore } from '@/stores/tasks'
-import { getRandomPetFromPool } from '@/utils/petsPool'
+import { getIconByPetLevel, getPetItemName, getRandomPetFromPool } from '@/utils/petsPool'
+import { taskStateTextMap } from '@/utils/utils'
 
 const stuStore = useStudentStore()
 const petStore = usePetStore()
@@ -32,7 +33,7 @@ const addPet = () => {
   const petData = {
     id: petStore.getNextPetId(),
     petId: petItem.id,
-    level: 0,
+    level: 1,
   }
 
   const stuData = {
@@ -47,8 +48,6 @@ const addPet = () => {
 
   petStore.addPet({
     ...petData,
-    name: petItem.name,
-    icon: petItem.icon,
     ownerId: curStudent.value.id,
   })
 
@@ -78,8 +77,23 @@ const addPet = () => {
           <div class="value pet-cards">
             <div v-if="curStudent?.pets.length">
               <div class="pet-card" v-for="pet in curStudent?.pets" :key="pet.id">
-                <img class="icon" :src="petStore.petById(pet.id)?.icon" />
-                <div class="name">{{ petStore.petById(pet.id)?.name }}</div>
+                <img
+                  class="icon"
+                  :src="
+                    getIconByPetLevel({
+                      id: petStore.petById(pet.id)?.petId,
+                      level: petStore.petById(pet.id)?.level,
+                    })
+                  "
+                />
+                <div class="name">
+                  {{
+                    getPetItemName({
+                      id: petStore.petById(pet.id)?.petId,
+                      level: petStore.petById(pet.id)?.level,
+                    })
+                  }}
+                </div>
               </div>
             </div>
             <div v-else>
@@ -92,6 +106,17 @@ const addPet = () => {
           <div class="value task-cards">
             <div class="task-card" v-for="taskId in curStudent?.tasks" :key="taskId">
               <div class="content">{{ taskStore.taskById(taskId)?.content }}</div>
+              <div class="state">
+                状态：<span
+                  :class="taskStore.taskById(taskId)!.state === 0 ? 'warn-text' : 'green-text'"
+                  >{{
+                    taskStore.taskById(taskId)
+                      ? taskStateTextMap[taskStore.taskById(taskId)!.state]
+                      : ''
+                  }}</span
+                >
+              </div>
+              <div class="coin">奖励：{{ taskStore.taskById(taskId)?.rewardCoin }}积分</div>
             </div>
           </div>
         </div>
@@ -191,12 +216,34 @@ const addPet = () => {
 }
 .task-card {
   width: 100%;
-  height: 36px;
+  min-height: 36px;
   padding: 8px 12px;
   margin: 0 0 12px;
+  box-shadow: 0 2px 8px #00000020;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  background: #fff;
+  color: #333;
+}
+.task-card .content {
+  flex: 1;
+  font-size: 14px;
+}
+.task-card .state,
+.task-card .coin {
+  font-size: 14px;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.warn-text {
+  color: red;
+}
+
+.green-text {
+  color: #1a9d6a;
 }
 </style>

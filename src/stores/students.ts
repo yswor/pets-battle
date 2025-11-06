@@ -9,6 +9,10 @@ export const useStudentStore = defineStore('student', () => {
     return (id: number) => students.value.find((student) => student.id === id)
   })
 
+  const studentsByName = computed(() => {
+    return (name: string) => students.value.filter((student) => student.name.indexOf(name) > -1)
+  })
+
   function setStudents(newStudents: StudentType[]) {
     students.value = newStudents
   }
@@ -22,5 +26,5 @@ export const useStudentStore = defineStore('student', () => {
     }
   }
 
-  return { students, studentById, setStudents, updateStudent }
+  return { students, studentById, studentsByName, setStudents, updateStudent }
 })

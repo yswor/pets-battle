@@ -1,3 +1,5 @@
+import type { PetPoolItem } from '@/type'
+
 // 1. 前缀数组 (表示属性、特征、基础概念)
 const pokemonNamePrefixes = [
   '妙',
@@ -176,77 +178,69 @@ export const generatePokemonName = () => {
 
 const imgUrl = (path: string) => new URL(path, import.meta.url).href
 
-const petsPool = [
+const petsPool: PetPoolItem[] = [
   {
     id: 1,
     name: '妙蛙种子',
-    icon: new URL('../assets/pets/pet_1.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_1.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_1.png'),
     },
   },
   {
     id: 2,
     name: '地地鼠',
-    icon: new URL('../assets/pets/pet_2.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_2.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_2.png'),
     },
   },
   {
     id: 3,
     name: '火狐狸',
-    icon: new URL('../assets/pets/pet_3.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_3.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_3.png'),
     },
   },
   {
     id: 4,
     name: '木木枭',
-    icon: new URL('../assets/pets/pet_4.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_4.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_4.png'),
     },
   },
   {
     id: 5,
     name: '呆火鳄',
-    icon: new URL('../assets/pets/pet_5.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_5.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_5.png'),
     },
   },
   {
     id: 6,
     name: '杰尼龟',
-    icon: new URL('../assets/pets/pet_6.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_6.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_6.png'),
     },
   },
   {
     id: 7,
     name: '泪眼蜥',
-    icon: new URL('../assets/pets/pet_7.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_7.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_7.png'),
     },
   },
   {
     id: 8,
     name: '胖丁',
-    icon: new URL('../assets/pets/pet_8.png', import.meta.url).href,
     levelIconMap: {
-      0: imgUrl('../assets/original_egg.png'),
-      1: imgUrl('../assets/pets/pet_8.png'),
+      1: imgUrl('../assets/original_egg.png'),
+      2: imgUrl('../assets/pets/pet_8.png'),
     },
   },
 ]
@@ -254,6 +248,39 @@ const petsPool = [
 export const getRandomPetFromPool = () => {
   const randomIndex = Math.floor(Math.random() * petsPool.length)
   return petsPool[randomIndex]!
+}
+
+export const getPetItem = (id: number | undefined) => {
+  if (id) {
+    return petsPool.find((pet) => pet.id === id)
+  }
+}
+
+export const getPetItemName = (params: { id: number | undefined; level: number | undefined }) => {
+  if (params.id && params.level) {
+    const petItem = petsPool.find((pet) => pet.id === params.id)
+    return params.level === 1 ? '宠物蛋' : petItem?.name
+  }
+}
+
+export const getIconByPetLevel = (params: {
+  id: number | undefined
+  level: number | undefined
+}) => {
+  if (params.id && params.level) {
+    const petItem = petsPool.find((pet) => pet.id === params.id)
+
+    if (petItem) {
+      return petItem.levelIconMap[params.level]
+    }
+  }
+}
+
+export const petLevelByCoin = (coin: number) => {
+  if (coin < 30) {
+    return 1
+  }
+  return 2
 }
 
 export default petsPool

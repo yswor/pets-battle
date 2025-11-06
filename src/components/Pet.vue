@@ -2,6 +2,7 @@
 import { usePetStore } from '@/stores/pets'
 import { useStudentStore } from '@/stores/students'
 import type { Pet } from '@/type'
+import { getIconByPetLevel, getPetItemName } from '@/utils/petsPool'
 
 const { pet } = defineProps<{ pet: Pet }>()
 
@@ -10,19 +11,20 @@ const emit = defineEmits<{
 }>()
 
 const stuStore = useStudentStore()
-const petStore = usePetStore()
-
-const handleEdit = () => {
-  emit('edit', pet.id)
-}
 </script>
 
 <template>
   <div class="pet-card" :key="pet.id">
-    <img class="icon" :src="pet.icon" />
-    <div class="name">{{ pet.name }}</div>
+    <img class="icon" :src="getIconByPetLevel({ id: pet.petId, level: pet.level })" />
+    <div class="name">
+      {{
+        getPetItemName({
+          id: pet.petId,
+          level: pet.level,
+        })
+      }}
+    </div>
     <div class="owner">{{ stuStore.studentById(pet.ownerId)?.name }}</div>
-    <!-- <div class="edit" @click="handleEdit">编辑</div> -->
   </div>
 </template>
 

@@ -29,5 +29,12 @@ export const usePetStore = defineStore('pet', () => {
     pets.value.push(pet)
   }
 
-  return { pets, petById, setPets, getNextPetId, setMaxPetId, addPet, maxPetId }
+  function updatePet(updatedPet: PetType) {
+    const index = pets.value.findIndex((pet) => pet.id === updatedPet.id)
+    if (index !== -1) {
+      pets.value[index] = updatedPet
+    }
+  }
+
+  return { pets, petById, setPets, getNextPetId, setMaxPetId, addPet, maxPetId, updatePet }
 })
