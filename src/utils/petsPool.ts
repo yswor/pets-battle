@@ -1,4 +1,13 @@
 import type { PetPoolItem } from '@/type'
+import orginalEgg from '@/assets/original_egg.png'
+import petA from '@/assets/pets/pet_1.png'
+import petB from '@/assets/pets/pet_2.png'
+import petC from '@/assets/pets/pet_3.png'
+import petD from '@/assets/pets/pet_4.png'
+import petE from '@/assets/pets/pet_5.png'
+import petF from '@/assets/pets/pet_6.png'
+import petG from '@/assets/pets/pet_7.png'
+import petH from '@/assets/pets/pet_8.png'
 
 // 1. 前缀数组 (表示属性、特征、基础概念)
 const pokemonNamePrefixes = [
