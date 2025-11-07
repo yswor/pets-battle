@@ -1083,7 +1083,7 @@ onMounted(() => {
 
   const maxTaskId = storage.get('maxTaskId')
   if (maxTaskId) {
-    taskStore.setMaxTaskId(maxPetId)
+    taskStore.setMaxTaskId(maxTaskId)
   }
 
   window.addEventListener('beforeunload', handleBeforeUnload)

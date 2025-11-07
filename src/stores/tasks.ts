@@ -31,7 +31,7 @@ export const useTaskStore = defineStore('task', () => {
   }
 
   function setMaxTaskId(id: number) {
-    maxTaskId.value += 1
+    maxTaskId.value = id
   }
 
   return { tasks, maxTaskId, taskById, setTasks, updateTask, getNextTaskId, setMaxTaskId }
