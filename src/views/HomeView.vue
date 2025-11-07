@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Fragment, ref } from 'vue'
+import { ref } from 'vue'
 import Student from '@/components/Student.vue'
-import type { Pet, Student as StudentType } from '@/type'
+import type { Student as StudentType } from '@/type'
 import Drawer from '@/components/Drawer.vue'
 import { useStudentStore } from '@/stores/students'
 import { usePetStore } from '@/stores/pets'
@@ -62,7 +62,7 @@ const addPet = () => {
         <Student :student="student" @openDetail="showDetail" />
       </div>
     </div>
-    <Drawer :open="drawerOpen" @close="closeDetail">
+    <drawer :open="drawerOpen" @close="closeDetail">
       <div class="detail">
         <div class="info-line name">
           <div class="label">姓名</div>
@@ -122,7 +122,7 @@ const addPet = () => {
         </div>
         <!-- TODO: 礼物赠送情况 -->
       </div>
-    </Drawer>
+    </drawer>
   </div>
 </template>
 

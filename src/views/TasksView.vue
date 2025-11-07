@@ -230,7 +230,7 @@ const confirmTaskAccomplished = () => {
       </div>
     </div>
     <!-- 新增任务弹窗 -->
-    <CModal :open="addTaskModalOpen" @close="closeTaskModal">
+    <c-modal :open="addTaskModalOpen" @close="closeTaskModal">
       <div class="add-task-modal">
         <div class="title">新建任务</div>
         <div class="form">
@@ -261,9 +261,9 @@ const confirmTaskAccomplished = () => {
           <div class="btn confirm-btn" @click="confirmAddTask">确定</div>
         </div>
       </div>
-    </CModal>
+    </c-modal>
     <!-- 任务分配弹窗 -->
-    <CModal :open="assignTaskModelOpen" @close="closeAssignModel">
+    <c-modal :open="assignTaskModelOpen" @close="closeAssignModel">
       <div class="add-task-modal">
         <div class="title">分配任务</div>
         <div class="form">
@@ -290,13 +290,13 @@ const confirmTaskAccomplished = () => {
           </div>
         </div>
         <div class="btns">
-          <div class="btn cancel-btn" @click="closeTaskModal">取消</div>
+          <div class="btn cancel-btn" @click="closeAssignModel">取消</div>
           <div class="btn confirm-btn" @click="confirmAssignTask">确定</div>
         </div>
       </div>
-    </CModal>
+    </c-modal>
     <!-- 确认任务完成弹窗 -->
-    <CModal :open="taskAccomplishedModelOpen" @close="closeTaskAccomplishedModel">
+    <c-modal :open="taskAccomplishedModelOpen" @close="closeTaskAccomplishedModel">
       <div class="add-task-modal">
         <div class="title">是否确定任务已完成？</div>
         <div class="form">
@@ -318,7 +318,7 @@ const confirmTaskAccomplished = () => {
           <div class="btn confirm-btn" @click="confirmTaskAccomplished">确定</div>
         </div>
       </div>
-    </CModal>
+    </c-modal>
   </div>
 </template>
 

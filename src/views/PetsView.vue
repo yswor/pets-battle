@@ -31,7 +31,7 @@ const confirmEdit = () => {
         <Pet :pet="pet" @edit="showEditModal" />
       </div>
     </div>
-    <CModal :open="editModalOpen" @close="closeEditModal">
+    <c-modal :open="editModalOpen" @close="closeEditModal">
       <div class="edit-modal">
         <div class="input-box">
           <div class="label">宠物姓名</div>
@@ -42,7 +42,7 @@ const confirmEdit = () => {
           <div class="btn confirm-btn" @click="confirmEdit">确认</div>
         </div>
       </div>
-    </CModal>
+    </c-modal>
   </div>
 </template>
 
