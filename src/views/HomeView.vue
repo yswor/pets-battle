@@ -38,13 +38,10 @@ const addPet = () => {
 
   const stuData = {
     ...curStudent.value,
-    pets: [...curStudent.value.pets, petData],
+    pets: [...curStudent.value.pets, petData.id],
   }
 
-  stuStore.updateStudent({
-    ...curStudent.value,
-    pets: [...curStudent.value.pets, petData],
-  })
+  stuStore.updateStudent(stuData)
 
   petStore.addPet({
     ...petData,
@@ -76,21 +73,21 @@ const addPet = () => {
           <div class="label">宠物</div>
           <div class="value pet-cards">
             <div v-if="curStudent?.pets.length">
-              <div class="pet-card" v-for="pet in curStudent?.pets" :key="pet.id">
+              <div class="pet-card" v-for="id in curStudent?.pets" :key="id">
                 <img
                   class="icon"
                   :src="
                     getIconByPetLevel({
-                      id: petStore.petById(pet.id)?.petId,
-                      level: petStore.petById(pet.id)?.level,
+                      id: petStore.petById(id)?.petId,
+                      level: petStore.petById(id)?.level,
                     })
                   "
                 />
                 <div class="name">
                   {{
                     getPetItemName({
-                      id: petStore.petById(pet.id)?.petId,
-                      level: petStore.petById(pet.id)?.level,
+                      id: petStore.petById(id)?.petId,
+                      level: petStore.petById(id)?.level,
                     })
                   }}
                 </div>

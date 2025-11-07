@@ -1,8 +1,4 @@
-<script setup lang="ts">
-import { useUserStore } from '@/stores/user'
-
-const userStore = useUserStore()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="wrap-layout-container">

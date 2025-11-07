@@ -52,9 +52,9 @@ const confirmTaskAccomplished = () => {
   }
   stuStore.updateStudent(stuItem)
 
-  const curPetItem = stuItem.pets[stuItem.pets.length - 1]
-  if (curPetItem && curPetItem?.id) {
-    const oldPet = petStore.petById(curPetItem?.id)
+  const curPetItemId = stuItem.pets[stuItem.pets.length - 1]
+  if (curPetItemId) {
+    const oldPet = petStore.petById(curPetItemId)
     if (!oldPet) {
       alert('未知错误')
       return

@@ -22,7 +22,7 @@ export type Gift = {
 export type Student = {
   id: number
   name: string
-  pets: { petId: number; id: number; level: number }[]
+  pets: number[]
   coin: number
   receivedGifts: Gift[]
   sendGifts: Gift[]
