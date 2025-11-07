@@ -1,13 +1,16 @@
 import type { PetPoolItem } from '@/type'
-import orginalEgg from '@/assets/original_egg.png'
-import petA from '@/assets/pets/pet_1.png'
-import petB from '@/assets/pets/pet_2.png'
-import petC from '@/assets/pets/pet_3.png'
-import petD from '@/assets/pets/pet_4.png'
-import petE from '@/assets/pets/pet_5.png'
-import petF from '@/assets/pets/pet_6.png'
-import petG from '@/assets/pets/pet_7.png'
-import petH from '@/assets/pets/pet_8.png'
+
+const petIconMap = {
+  orginalEgg: new URL('../assets/original_egg.png', import.meta.url).href,
+  petA: new URL('../assets/pets/pet_1.png', import.meta.url).href,
+  petB: new URL('../assets/pets/pet_2.png', import.meta.url).href,
+  petC: new URL('../assets/pets/pet_3.png', import.meta.url).href,
+  petD: new URL('../assets/pets/pet_4.png', import.meta.url).href,
+  petE: new URL('../assets/pets/pet_5.png', import.meta.url).href,
+  petF: new URL('../assets/pets/pet_6.png', import.meta.url).href,
+  petG: new URL('../assets/pets/pet_7.png', import.meta.url).href,
+  petH: new URL('../assets/pets/pet_8.png', import.meta.url).href,
+}
 
 // 1. 前缀数组 (表示属性、特征、基础概念)
 const pokemonNamePrefixes = [
@@ -192,64 +195,64 @@ const petsPool: PetPoolItem[] = [
     id: 1,
     name: '妙蛙种子',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_1.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petA,
     },
   },
   {
     id: 2,
     name: '地地鼠',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_2.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petB,
     },
   },
   {
     id: 3,
     name: '火狐狸',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_3.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petC,
     },
   },
   {
     id: 4,
     name: '木木枭',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_4.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petD,
     },
   },
   {
     id: 5,
     name: '呆火鳄',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_5.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petE,
     },
   },
   {
     id: 6,
     name: '杰尼龟',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_6.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petF,
     },
   },
   {
     id: 7,
     name: '泪眼蜥',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_7.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petG,
     },
   },
   {
     id: 8,
     name: '胖丁',
     levelIconMap: {
-      1: imgUrl('../assets/original_egg.png'),
-      2: imgUrl('../assets/pets/pet_8.png'),
+      1: petIconMap.orginalEgg,
+      2: petIconMap.petH,
     },
   },
 ]
