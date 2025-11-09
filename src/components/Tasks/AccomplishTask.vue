@@ -60,7 +60,9 @@ const confirmTaskAccomplished = () => {
       return
     }
     const pet: PetType = {
-      ...oldPet,
+      id: oldPet.id,
+      petId: oldPet.petId,
+      ownerId: oldPet.ownerId,
       level: petLevelByCoin(stuItem.coin),
     }
     petStore.updatePet(pet)

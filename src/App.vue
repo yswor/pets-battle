@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, onBeforeUnmount, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import Wrapper from './layouts/Wrapper.vue'
 import { useStudentStore } from './stores/students'
 import storage from './utils/storage'
@@ -7,6 +7,7 @@ import { usePetStore } from './stores/pets'
 import { useTaskStore } from './stores/tasks'
 import DataUpload from './components/DataUpload.vue'
 import { useUtilStore } from './stores/util'
+import BattleEntry from './components/Battle/BattleEntry.vue'
 
 const stuStore = useStudentStore()
 const petStore = usePetStore()
@@ -60,6 +61,7 @@ onUnmounted(() => {
 <template>
   <DataUpload v-if="!utilStore.dataUploadFlag" />
   <Wrapper />
+  <BattleEntry />
 </template>
 
 <style scoped></style>

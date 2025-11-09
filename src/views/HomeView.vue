@@ -6,7 +6,7 @@ import Drawer from '@/components/Drawer.vue'
 import { useStudentStore } from '@/stores/students'
 import { usePetStore } from '@/stores/pets'
 import { useTaskStore } from '@/stores/tasks'
-import { getIconByPetLevel, getPetItemName, getRandomPetFromPool } from '@/utils/petsPool'
+import { getRandomPetFromPool } from '@/utils/petsPool'
 import { taskStateTextMap } from '@/utils/utils'
 
 const stuStore = useStudentStore()
@@ -74,22 +74,9 @@ const addPet = () => {
           <div class="value pet-cards">
             <div v-if="curStudent?.pets.length">
               <div class="pet-card" v-for="id in curStudent?.pets" :key="id">
-                <img
-                  class="icon"
-                  :src="
-                    getIconByPetLevel({
-                      id: petStore.petById(id)?.petId,
-                      level: petStore.petById(id)?.level,
-                    })
-                  "
-                />
+                <img class="icon" :src="petStore.petById(id)?.icon" />
                 <div class="name">
-                  {{
-                    getPetItemName({
-                      id: petStore.petById(id)?.petId,
-                      level: petStore.petById(id)?.level,
-                    })
-                  }}
+                  {{ petStore.petById(id)?.name }}
                 </div>
               </div>
             </div>

@@ -275,6 +275,10 @@ export const getPetItemName = (params: { id: number | undefined; level: number |
   }
 }
 
+export const getPetName = (level: number, name: string) => {
+  return level === 1 ? '宠物蛋' : name
+}
+
 export const getIconByPetLevel = (params: {
   id: number | undefined
   level: number | undefined
