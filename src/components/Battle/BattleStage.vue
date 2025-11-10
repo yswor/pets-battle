@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import PlayerPicker from './PlayerPicker.vue'
+import { useBattleStore } from '@/stores/battle'
 
 const { open } = defineProps<{ open: boolean }>()
 const emits = defineEmits<{ close: [] }>()
+
+const battleStore = useBattleStore()
 
 const closeStage = () => {
   emits('close')
@@ -11,15 +13,12 @@ const closeStage = () => {
 
 <template>
   <div class="battle-stage-container" v-if="open">
-    <!-- <div class="tip">准备战斗!!</div> -->
     <div class="stage checker">
       <div class="area left">
-        <div class="pre">请选择玩家A</div>
-        <PlayerPicker @pick="" />
+        <img class="pet" :src="battleStore.palayerAPets[0]?.icon" />
       </div>
       <div class="area right">
-        <div class="pre">请选择玩家B</div>
-        <PlayerPicker />
+        <img class="pet" :src="battleStore.palayerBPets[0]?.icon" />
       </div>
       <div class="stage-vertical-line"></div>
     </div>
@@ -98,6 +97,11 @@ const closeStage = () => {
   width: 45%;
   height: 90%;
   margin: 0 20px;
+}
+
+.stage .area .pet {
+  width: 40%;
+  height: 40%;
 }
 
 .stage .area.right {

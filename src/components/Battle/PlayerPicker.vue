@@ -1,21 +1,26 @@
 <script setup lang="ts">
 import { useStudentStore } from '@/stores/students'
+import type { Student } from '@/type'
+import { ref } from 'vue'
 
-const emits = defineEmits<{ pick: [number] }>()
+const emits = defineEmits<{ pick: [Student] }>()
 const stuStore = useStudentStore()
 
-const pickPlayer = (id: number) => {
-  emits('pick', id)
+const selectedIndex = ref<number | null>(null)
+
+const pickPlayer = (stu: Student, index: number) => {
+  selectedIndex.value = index
+  emits('pick', stu)
 }
 </script>
 
 <template>
   <div class="picker-box">
     <div
-      class="btn picker-item"
-      v-for="student in stuStore.studentsPetReachLevel"
+      v-for="(student, index) in stuStore.studentsPetReachLevel"
+      :class="'btn picker-item' + (selectedIndex === index ? ' selected' : '')"
       :key="student.id"
-      @click="() => pickPlayer(student.id)"
+      @click="() => pickPlayer(student, index)"
     >
       {{ student.name }}
     </div>
@@ -41,5 +46,10 @@ const pickPlayer = (id: number) => {
 
   border-radius: 4px;
   border: 1px solid #9c27b0;
+  margin: 0 12px 12px 0;
+}
+.picker-box .picker-item.selected {
+  background: #9c27b0;
+  color: #fff;
 }
 </style>

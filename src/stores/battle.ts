@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 import { usePetStore } from './pets'
 import petsPool from '@/utils/petsPool'
 
-export const battle = defineStore('battle', () => {
+export const useBattleStore = defineStore('battle', () => {
   const playerA = ref<Student | null>(null)
   const playerB = ref<Student | null>(null)
 
@@ -61,7 +61,7 @@ export const battle = defineStore('battle', () => {
   }
 
   function updatePlayerB(player: Student) {
-    playerA.value = player
+    playerB.value = player
   }
 
   return { playerA, playerB, palayerAPets, palayerBPets, updatePlayerA, updatePlayerB }
