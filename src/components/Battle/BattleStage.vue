@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import PlayerPicker from './PlayerPicker.vue'
+
 const { open } = defineProps<{ open: boolean }>()
 const emits = defineEmits<{ close: [] }>()
 
@@ -11,8 +13,14 @@ const closeStage = () => {
   <div class="battle-stage-container" v-if="open">
     <!-- <div class="tip">准备战斗!!</div> -->
     <div class="stage checker">
-      <div class="area left"></div>
-      <div class="area right"></div>
+      <div class="area left">
+        <div class="pre">请选择玩家A</div>
+        <PlayerPicker @pick="" />
+      </div>
+      <div class="area right">
+        <div class="pre">请选择玩家B</div>
+        <PlayerPicker />
+      </div>
       <div class="stage-vertical-line"></div>
     </div>
     <div class="mask" @click="closeStage"></div>
@@ -64,6 +72,7 @@ const closeStage = () => {
 }
 
 .checker {
+  background: greenyellow;
   /* background-image:
     linear-gradient(45deg, #f4c2c2 25%, transparent 25%),
     linear-gradient(-45deg, #f4c2c2 25%, transparent 25%),
@@ -74,14 +83,14 @@ const closeStage = () => {
     0 0,
     0 10px,
     10px -10px,
-    -10px 0px; */
-  background-color: #fffaf7;
+    -10px 0px;
+  background-color: #fffaf7; */
 }
 
 .stage .stage-vertical-line {
   width: 2px;
   height: 80%;
-  /* background: #fff; */
+  background: #fff;
   order: 1;
 }
 

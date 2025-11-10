@@ -18,15 +18,9 @@ const showPlayerPicker = () => {
 </script>
 
 <template>
-  <div class="float-btn" @click="showPlayerPicker">
+  <div class="float-btn" @click="showBattleStage">
     <img class="logo" :src="logoSrc" />
   </div>
-  <CModal :open="playerPickerOpen">
-    <div class="player-picker-box">
-      <div class="title">你是谁</div>
-      <div class=""></div>
-    </div>
-  </CModal>
   <BattleStage :open="stageOpen" @close="stageOpen = false" />
 </template>
 
@@ -34,7 +28,7 @@ const showPlayerPicker = () => {
 .float-btn {
   background: #fff;
   border-radius: 50%;
-  box-shadow: 2px 2px 8px 2px #00000050;
+  box-shadow: 2px 8px 16px #00000030;
 
   width: 3vw;
   height: 3vw;
@@ -54,9 +48,25 @@ const showPlayerPicker = () => {
 .float-btn .logo {
   width: 80%;
   height: 80%;
+  scale: 1;
+  animation: breath infinite 1s;
+}
+
+@keyframes breath {
+  from {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.05;
+  }
+  to {
+    scale: 1;
+  }
 }
 
 .player-picker-box {
   width: 100%;
+  height: 100%;
 }
 </style>
