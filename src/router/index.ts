@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
+import PetsView from '@/views/PetsView.vue'
+import TasksView from '@/views/TasksView.vue'
+import PetView from '@/views/PetView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,23 +16,18 @@ const router = createRouter({
     {
       path: '/pets',
       name: 'pets',
-      component: () => import('../views/PetsView.vue'),
+      component: PetsView,
+    },
+    {
+      path: '/pet/:id',
+      name: 'pet',
+      component: PetView
     },
     {
       path: '/tasks',
       name: 'tasks',
-      component: () => import('../views/TasksView.vue'),
+      component: TasksView,
     },
-    {
-      path: '/entry',
-      name: 'entry',
-      component: () => import('../views/EntryView.vue'),
-    },
-    // {
-    //   path: '/settings',
-    //   name: 'settings',
-    //   component: () => import('../views/SettingsView.vue'),
-    // },
   ],
 })
 

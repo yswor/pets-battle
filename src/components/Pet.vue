@@ -1,25 +1,30 @@
 <script setup lang="ts">
 import { usePetStore } from '@/stores/pets'
-import { useStudentStore } from '@/stores/students'
 import type { Pet } from '@/type'
+import { useRouter } from 'vue-router'
 
 const { pet } = defineProps<{ pet: Pet }>()
 
 const emit = defineEmits<{
   edit: [id: number]
 }>()
-
+const router = useRouter()
 const petStore = usePetStore()
-const stuStore = useStudentStore()
+
+const petDetail = petStore.petById(pet.id)
+
+const navToPet = () => {
+  router.push({ name: 'pet', params: { id: pet.id } })
+}
 </script>
 
 <template>
-  <div class="pet-card" :key="pet.id">
+  <div class="pet-card" :key="pet.id" @click="navToPet">
     <img class="icon" :src="petStore.petById(pet.id)?.icon" />
     <div class="name">
-      {{ petStore.petById(pet.id)?.name }}
+      {{ petDetail?.name }}
     </div>
-    <div class="owner">{{ petStore.petById(pet.id)?.ownerName }}</div>
+    <div class="owner">{{ petDetail?.ownerName }}</div>
   </div>
 </template>
 
