@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { usePetStore } from '@/stores/pets'
 import { useStudentStore } from '@/stores/students'
+import { useTaskStore } from '@/stores/tasks'
 import { useUtilStore } from '@/stores/util'
 import storage from '@/utils/storage'
 import { computed, ref } from 'vue'
@@ -7,6 +9,8 @@ import { read, utils } from 'xlsx'
 
 const stuStore = useStudentStore()
 const utilStore = useUtilStore()
+const petStore = usePetStore()
+const taskStore = useTaskStore()
 
 const jsonData = ref<any | null>(null)
 const error = ref('')
@@ -57,6 +61,14 @@ const confirmUpload = () => {
   storage.set('students', jsonData.value)
   stuStore.setStudents(jsonData.value)
 }
+
+const resetData = () => {
+  stuStore.resetStudents()
+  petStore.resetPets()
+  taskStore.resetTasks()
+
+  storage.clear()
+}
 </script>
 
 <template>
@@ -66,6 +78,7 @@ const confirmUpload = () => {
     <pre class="pre-box" v-if="jsonData">{{ formattedJson }}</pre>
 
     <div class="btn confirm-btn" @click="confirmUpload">确认导入数据</div>
+    <div class="btn confirm-btn reset-btn" @click="resetData">重置本地数据</div>
   </div>
 </template>
 
@@ -93,6 +106,9 @@ const confirmUpload = () => {
   width: 200px;
   height: 40px;
   border: 1px solid #333;
+}
+.data-upload-box .confirm-btn.reset-btn {
+  margin: 44px 0 0;
 }
 .data-upload-box .pre-box {
   width: 100%;

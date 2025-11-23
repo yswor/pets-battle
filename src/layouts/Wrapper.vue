@@ -10,7 +10,6 @@
       <router-link class="wrap-layout-nav-item" to="/tasks" active-class="active"
         >任务列表</router-link
       >
-      <!-- <router-link class="wrap-layout-nav-item" to="/entry" active-class="active">入口</router-link> -->
     </nav>
     <div class="page-right-content">
       <RouterView />

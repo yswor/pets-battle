@@ -88,6 +88,11 @@ export const usePetStore = defineStore('pet', () => {
     }
   }
 
+  function resetPets() {
+    pets.value = []
+    maxPetId.value = 0
+  }
+
   return {
     pets,
     petById,
@@ -99,5 +104,6 @@ export const usePetStore = defineStore('pet', () => {
     updatePet,
     petNextExpProgress,
     petNextLevelEarnedExp,
+    resetPets,
   }
 })

@@ -21,6 +21,9 @@ const storage = {
       console.error(`Error removing item ${key} from localStorage`, error)
     }
   },
+  clear: () => {
+    localStorage.clear()
+  },
 }
 
 export default storage

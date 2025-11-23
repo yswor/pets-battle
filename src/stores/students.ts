@@ -40,6 +40,10 @@ export const useStudentStore = defineStore('student', () => {
     }
   }
 
+  function resetStudents() {
+    students.value = []
+  }
+
   return {
     students,
     studentById,
@@ -47,5 +51,6 @@ export const useStudentStore = defineStore('student', () => {
     studentsPetReachLevel,
     setStudents,
     updateStudent,
+    resetStudents,
   }
 })

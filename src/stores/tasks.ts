@@ -34,5 +34,19 @@ export const useTaskStore = defineStore('task', () => {
     maxTaskId.value = id
   }
 
-  return { tasks, maxTaskId, taskById, setTasks, updateTask, getNextTaskId, setMaxTaskId }
+  function resetTasks() {
+    tasks.value = []
+    maxTaskId.value = 0
+  }
+
+  return {
+    tasks,
+    maxTaskId,
+    taskById,
+    setTasks,
+    updateTask,
+    getNextTaskId,
+    setMaxTaskId,
+    resetTasks,
+  }
 })
