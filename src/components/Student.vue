@@ -31,6 +31,7 @@ const addPet = () => {
     id: petStore.getNextPetId(),
     petId: petItem.id,
     level: 1,
+    exp: 0,
   }
 
   const stuData = {
@@ -134,7 +135,7 @@ const navToPet = (id: number) => {
   text-align: center;
 }
 
-.coin {
+.info-line.coin {
   margin: 0 0 12px;
   text-align: center;
 }

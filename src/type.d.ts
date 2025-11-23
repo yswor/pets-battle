@@ -3,6 +3,7 @@ export type Pet = {
   petId: number
   ownerId: number
   level: number
+  exp: number
 }
 
 export type PetPoolItem = {

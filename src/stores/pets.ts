@@ -2,7 +2,7 @@ import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Pet as PetType } from '@/type'
 import storage from '@/utils/storage'
-import petsPool, { getPetName } from '@/utils/petsPool'
+import petsPool, { getPetName, petEachLevelExpMap } from '@/utils/petsPool'
 import { useStudentStore } from './students'
 
 export const usePetStore = defineStore('pet', () => {
@@ -25,6 +25,41 @@ export const usePetStore = defineStore('pet', () => {
           }
         }
       }
+    }
+  })
+
+  const petNextExpProgress = computed(() => {
+    return (id: number) => {
+      const pet = petById.value(id)
+
+      if (!pet?.level || (!pet.exp && pet.exp !== 0)) {
+        return 0
+      }
+
+      const expForNextLevel = petEachLevelExpMap[pet.level + 1] || 0
+
+      const reachedLevelsExp = new Array(pet.level).fill(0).reduce((acc, _, idx) => {
+        return acc + (petEachLevelExpMap[idx + 1] || 0)
+      }, 0)
+      const curLevelEarnedExp = pet.exp - reachedLevelsExp
+
+      return (curLevelEarnedExp / expForNextLevel) * 100
+    }
+  })
+
+  const petNextLevelEarnedExp = computed(() => {
+    return (id: number) => {
+      const pet = petById.value(id)
+
+      if (!pet?.level || (!pet.exp && pet.exp !== 0)) {
+        return 0
+      }
+
+      const reachedLevelsExp = new Array(pet.level).fill(0).reduce((acc, _, idx) => {
+        return acc + (petEachLevelExpMap[idx + 1] || 0)
+      }, 0)
+
+      return computed(() => pet.exp - reachedLevelsExp)
     }
   })
 
@@ -53,5 +88,16 @@ export const usePetStore = defineStore('pet', () => {
     }
   }
 
-  return { pets, petById, setPets, getNextPetId, setMaxPetId, addPet, maxPetId, updatePet }
+  return {
+    pets,
+    petById,
+    setPets,
+    getNextPetId,
+    setMaxPetId,
+    addPet,
+    maxPetId,
+    updatePet,
+    petNextExpProgress,
+    petNextLevelEarnedExp,
+  }
 })

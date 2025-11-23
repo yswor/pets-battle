@@ -1,4 +1,5 @@
 import type { PetPoolItem } from '@/type'
+import { computed } from 'vue'
 
 const petIconMap = {
   orginalEgg: new URL('../assets/original_egg.png', import.meta.url).href,
@@ -188,8 +189,6 @@ export const generatePokemonName = () => {
   return list
 }
 
-const imgUrl = (path: string) => new URL(path, import.meta.url).href
-
 const petsPool: PetPoolItem[] = [
   {
     id: 1,
@@ -197,6 +196,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petA,
+      3: petIconMap.petA,
+      4: petIconMap.petA,
+      5: petIconMap.petA,
     },
   },
   {
@@ -205,6 +207,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petB,
+      3: petIconMap.petB,
+      4: petIconMap.petB,
+      5: petIconMap.petB,
     },
   },
   {
@@ -213,6 +218,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petC,
+      3: petIconMap.petC,
+      4: petIconMap.petC,
+      5: petIconMap.petC,
     },
   },
   {
@@ -221,6 +229,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petD,
+      3: petIconMap.petD,
+      4: petIconMap.petD,
+      5: petIconMap.petD,
     },
   },
   {
@@ -229,6 +240,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petE,
+      3: petIconMap.petE,
+      4: petIconMap.petE,
+      5: petIconMap.petE,
     },
   },
   {
@@ -237,6 +251,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petF,
+      3: petIconMap.petF,
+      4: petIconMap.petF,
+      5: petIconMap.petF,
     },
   },
   {
@@ -245,6 +262,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petG,
+      3: petIconMap.petG,
+      4: petIconMap.petG,
+      5: petIconMap.petG,
     },
   },
   {
@@ -253,6 +273,9 @@ const petsPool: PetPoolItem[] = [
     levelIconMap: {
       1: petIconMap.orginalEgg,
       2: petIconMap.petH,
+      3: petIconMap.petH,
+      4: petIconMap.petH,
+      5: petIconMap.petH,
     },
   },
 ]
@@ -297,6 +320,22 @@ export const petLevelByCoin = (coin: number) => {
     return 1
   }
   return 2
+}
+
+export const getLevel = (curLevel: number, exp: number) => {
+  const nextLevelTotalExp = new Array(curLevel + 1)
+    .fill(0)
+    .reduce((prev, _, index) => prev + petEachLevelExpMap[index + 1], 0)
+
+  return nextLevelTotalExp > exp ? curLevel : curLevel + 1
+}
+
+export const petEachLevelExpMap: Record<number, number> = {
+  1: 0,
+  2: 30,
+  3: 90,
+  4: 180,
+  5: 400,
 }
 
 export default petsPool

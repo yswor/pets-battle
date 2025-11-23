@@ -15,6 +15,15 @@ const clickMask = () => {
   <div v-if="open" class="common-modal-container">
     <div class="slot">
       <slot></slot>
+      <div class="header" v-if="$slots.header">
+        <slot name="header"></slot>
+      </div>
+      <div class="body" v-if="$slots.body">
+        <slot name="body"></slot>
+      </div>
+      <div class="footer" v-if="$slots.footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
     <div class="common-modal-mask" @click.stop="clickMask"></div>
   </div>
@@ -55,5 +64,25 @@ const clickMask = () => {
   pointer-events: auto;
   padding: 32px;
   border-radius: 12px;
+}
+
+.slot .header {
+  font-size: 22px;
+  height: 32px;
+  font-weight: 600;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slot .body {
+  min-height: calc(24vh - 32px - 40px - 64px - 32px - 16px);
+  margin: 32px 0 16px;
+}
+.slot .footer {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

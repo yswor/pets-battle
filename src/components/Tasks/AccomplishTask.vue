@@ -2,16 +2,13 @@
 import { useStudentStore } from '@/stores/students'
 import CModal from '../CModal.vue'
 import { useTaskStore } from '@/stores/tasks'
-import type { Student, Task as TaskType, Pet as PetType } from '@/type'
+import type { Student, Task as TaskType } from '@/type'
 import { ref } from 'vue'
-import { usePetStore } from '@/stores/pets'
-import { petLevelByCoin } from '@/utils/petsPool'
 
 const { task } = defineProps<{ task: TaskType }>()
 
 const stuStore = useStudentStore()
 const taskStore = useTaskStore()
-const petStore = usePetStore()
 
 const modalOpen = ref(false)
 
@@ -45,28 +42,12 @@ const confirmTaskAccomplished = () => {
     return
   }
 
-  // 积分变动 更新学生积分信息以及宠物等级
+  // 积分变动 更新学生积分信息
   const stuItem: Student = {
     ...oldStudentData,
     coin: oldStudentData?.coin + task.rewardCoin,
   }
   stuStore.updateStudent(stuItem)
-
-  const curPetItemId = stuItem.pets[stuItem.pets.length - 1]
-  if (curPetItemId) {
-    const oldPet = petStore.petById(curPetItemId)
-    if (!oldPet) {
-      alert('未知错误')
-      return
-    }
-    const pet: PetType = {
-      id: oldPet.id,
-      petId: oldPet.petId,
-      ownerId: oldPet.ownerId,
-      level: petLevelByCoin(stuItem.coin),
-    }
-    petStore.updatePet(pet)
-  }
 }
 </script>
 
